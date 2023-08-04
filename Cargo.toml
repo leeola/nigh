@@ -1,0 +1,13 @@
+[workspace]
+members = [
+  "core",
+  "nigh",
+]
+
+[workspace.dependencies]
+tokio = "1.28"
+tracing = "0.1"
+anyhow = "1.0"
+thiserror = "1.0"
+async-trait = "0.1"
+clap = { version = "4.3", features = ["derive", "env"] }

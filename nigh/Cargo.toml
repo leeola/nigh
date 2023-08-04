@@ -1,0 +1,19 @@
+[package]
+name = "nigh"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "nigh"
+path = "src/bin/nigh.rs"
+
+[lib]
+name = "nigh"
+path = "src/lib.rs"
+
+[dependencies]
+nigh_core = { path = "../core" }
+clap.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3", features = ["parking_lot", "env-filter"] }
+

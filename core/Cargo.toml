@@ -1,0 +1,12 @@
+[package]
+name = "nigh_core"
+version = "0.1.0"
+edition = "2021"
+
+
+[lib]
+name = "nigh_core"
+path = "src/lib.rs"
+
+[dependencies]
+# unifi_protect = "0.4"
