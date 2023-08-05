@@ -34,7 +34,7 @@ async fn main() -> Result<()> {
     .unwrap();
 
     let Cli { config, command } = Cli::parse();
-    let mut nigh = Nigh::new(config);
+    let mut nigh = Nigh::new(config).unwrap();
     match command {
         Commands::List => nigh.fetch_cameras().await?,
     }

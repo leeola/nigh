@@ -12,9 +12,9 @@ default = ["cli"]
 cli = ["clap"]
 
 [dependencies]
+nigh_protect_api = { path = "../protect_api" }
 anyhow.workspace = true
 tracing.workspace = true
-unifi_protect = "0.4"
 
 # feature: cli
 clap = { workspace = true, optional = true }

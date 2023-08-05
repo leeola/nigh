@@ -1,9 +1,7 @@
 use anyhow::Result;
 #[cfg(feature = "clap")]
 use clap::Parser;
-use unifi_protect::UnifiProtectServer;
-
-pub mod client;
+use nigh_protect_api::ProtectApi;
 
 #[derive(Debug)]
 #[cfg_attr(feature = "clap", derive(Parser))]
@@ -18,22 +16,22 @@ pub struct Config {
 }
 pub struct Nigh {
     config: Config,
-    server: UnifiProtectServer,
+    client: ProtectApi,
 }
 impl Nigh {
-    pub fn new(config: Config) -> Self {
-        let server = UnifiProtectServer::new(&config.host);
-        Self { config, server }
+    pub fn new(config: Config) -> Result<Self> {
+        let client = ProtectApi::new(config.host.as_str())?;
+        Ok(Self { config, client })
     }
     pub async fn fetch_cameras(&mut self) -> Result<()> {
-        self.server
-            .login(&self.config.user, &self.config.pass)
-            .await
-            .map_err(|err: &str| anyhow::anyhow!(err.to_string()))?;
-        self.server
-            .fetch_cameras()
-            .await
-            .map_err(|err: String| anyhow::anyhow!(err))?;
+        // self.server
+        //     .login(&self.config.user, &self.config.pass)
+        //     .await
+        //     .map_err(|err: &str| anyhow::anyhow!(err.to_string()))?;
+        // self.server
+        //     .fetch_cameras()
+        //     .await
+        //     .map_err(|err: String| anyhow::anyhow!(err))?;
         Ok(())
     }
 }

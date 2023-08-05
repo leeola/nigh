@@ -1,0 +1,9 @@
+[package]
+name = "nigh_protect_api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror.workspace = true
+tracing.workspace = true
+url = "2.4.0"
