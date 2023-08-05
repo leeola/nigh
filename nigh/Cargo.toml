@@ -11,9 +11,16 @@ path = "src/bin/nigh.rs"
 name = "nigh"
 path = "src/lib.rs"
 
+[features]
+default = ["cli"]
+cli = ["dep:clap", "dep:tokio"]
+
 [dependencies]
-nigh_core = { path = "../core" }
-clap.workspace = true
+nigh_core = { path = "../core", features=["cli"] }
 tracing.workspace = true
+anyhow.workspace = true
 tracing-subscriber = { version = "0.3", features = ["parking_lot", "env-filter"] }
 
+# feature: cli
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"], optional = true }
+clap = { workspace = true, optional = true }

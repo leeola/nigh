@@ -1,14 +1,14 @@
+use anyhow::Result;
 use clap::{Parser, Subcommand};
+use nigh::{Config, Nigh};
 use tracing::{metadata::LevelFilter, subscriber};
 use tracing_subscriber::EnvFilter;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Cli {
-    /// The protect API host
-    #[arg(long, env = "PROTECT_API_HOST")]
-    host: String,
-
+    #[command(flatten)]
+    config: Config,
     #[command(subcommand)]
     command: Commands,
 }
@@ -18,7 +18,8 @@ enum Commands {
     List,
 }
 
-fn main() {
+#[tokio::main]
+async fn main() -> Result<()> {
     // TODO: Move logging init to a core utility, for ease of test setup.
     subscriber::set_global_default(
         tracing_subscriber::FmtSubscriber::builder()
@@ -32,8 +33,10 @@ fn main() {
     )
     .unwrap();
 
-    let config = Cli::parse();
-    dbg!(&config);
-
-    println!("Hello, world!");
+    let Cli { config, command } = Cli::parse();
+    let mut nigh = Nigh::new(config);
+    match command {
+        Commands::List => nigh.fetch_cameras().await?,
+    }
+    Ok(())
 }

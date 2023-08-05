@@ -3,10 +3,18 @@ name = "nigh_core"
 version = "0.1.0"
 edition = "2021"
 
-
 [lib]
 name = "nigh_core"
 path = "src/lib.rs"
 
+[features]
+default = ["cli"]
+cli = ["clap"]
+
 [dependencies]
+anyhow.workspace = true
+tracing.workspace = true
 unifi_protect = "0.4"
+
+# feature: cli
+clap = { workspace = true, optional = true }
