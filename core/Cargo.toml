@@ -9,4 +9,4 @@ name = "nigh_core"
 path = "src/lib.rs"
 
 [dependencies]
-# unifi_protect = "0.4"
+unifi_protect = "0.4"
