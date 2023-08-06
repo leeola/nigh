@@ -24,10 +24,9 @@ impl Nigh {
         Ok(Self { config, client })
     }
     pub async fn fetch_cameras(&mut self) -> Result<()> {
-        // self.server
-        //     .login(&self.config.user, &self.config.pass)
-        //     .await
-        //     .map_err(|err: &str| anyhow::anyhow!(err.to_string()))?;
+        self.client
+            .login(&self.config.user, &self.config.pass)
+            .await?;
         // self.server
         //     .fetch_cameras()
         //     .await
