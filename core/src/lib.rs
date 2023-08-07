@@ -27,10 +27,8 @@ impl Nigh {
         self.client
             .login(&self.config.user, &self.config.pass)
             .await?;
-        // self.server
-        //     .fetch_cameras()
-        //     .await
-        //     .map_err(|err: String| anyhow::anyhow!(err))?;
+        let cameras = self.client.list_cameras().await?;
+        dbg!(&cameras);
         Ok(())
     }
 }
